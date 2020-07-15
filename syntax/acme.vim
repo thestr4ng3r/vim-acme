@@ -22,19 +22,14 @@ syn keyword asmPseudoop		else
 
 syn match asmLabel		"\<[a-z_+-.][a-z0-9_+-]*\>"
 
-syn match decNumber		"\<\d\+\>"
-syn match hexNumber		"\(0x\|\$\)\x\+\>"
-syn match binNumber		"%[01]\+\>"
-syn match asmImmediate		"#\(0x\|\$\)\x\+\>"
-syn match asmImmediate		"#\d\+\>"
-syn match asmImmediate		"<\(0x\|\$\)\x\+\>"
-syn match asmImmediate		"<\d\+\>"
-syn match asmImmediate		">\(0x\|\$\)\x\+\>"
-syn match asmImmediate		">\d\+\>"
-syn match asmImmediate		"#<\(0x\|\$\)\x\+\>"
-syn match asmImmediate		"#<\d\+\>"
-syn match asmImmediate		"#>\(0x\|\$\)\x\+\>"
-syn match asmImmediate		"#>\d\+\>"
+let b:decLiteral = '\d\+'
+let b:hexLiteral = '\(0x\|$\)\x\+'
+let b:binLiteral = '\(0b\|%\)[01]\+'
+
+exe 'syn match decNumber	"\<'.b:decLiteral.'\>"'
+exe 'syn match hexNumber 	"\<'.b:hexLiteral.'\>"'
+exe 'syn match binNumber 	"\<'.b:binLiteral.'\>"'
+exe 'syn match asmImmediate	"\(#\|<\|>\|#<\|#>\)\('.b:decLiteral.'\|'.b:hexLiteral.'\|'.b:binLiteral.'\)\>"'
 
 if !exists("did_asm65_syntax_inits")
   let did_rgb_asm_syntax_inits = 1
